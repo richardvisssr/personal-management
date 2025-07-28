@@ -1,0 +1,143 @@
+name: Repository Sync Handler
+on:
+  repository_dispatch:
+    types: 
+      - enablelens-website-update
+      - enablelens-extension-update
+      - enablelens-infrastructure-update
+      - external-issue-created
+      - external-issue-updated
+
+jobs:
+  sync-enablelens-website:
+    if: github.event.action == 'enablelens-website-update'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create EnableLens Website Issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const payload = context.payload.client_payload;
+            
+            if (payload.type === 'issues' && payload.action === 'opened') {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `[ENABLELENS] Website: ${payload.title}`,
+                body: `
+                  **Synced from EnableLens Website Repository**
+                  
+                  Original Issue: ${payload.url}
+                  
+                  This issue was automatically created to track website-related work in your personal management system.
+                `,
+                labels: ['enablelens', 'website', 'synced']
+              });
+            }
+
+  sync-enablelens-extension:
+    if: github.event.action == 'enablelens-extension-update'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Handle Extension Updates
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const payload = context.payload.client_payload;
+            
+            if (payload.type === 'push' && payload.ref === 'refs/heads/main') {
+              // Create a progress update issue for main branch pushes
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `[ENABLELENS] Extension: New commit pushed`,
+                body: `
+                  **Extension Development Progress**
+                  
+                  New commit: ${payload.sha.substring(0, 7)}
+                  Branch: main
+                  
+                  Review the changes and update project status accordingly.
+                `,
+                labels: ['enablelens', 'extension', 'progress-update']
+              });
+            }
+
+  sync-external-issue:
+    if: github.event.action == 'external-issue-created'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Synced Issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const payload = context.payload.client_payload;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `[SYNC] ${payload.title}`,
+              body: `
+                **Synced from**: ${payload.repo}
+                **Original Issue**: ${payload.url}
+                **Type**: ${payload.type || 'General'}
+                
+                ---
+                
+                ${payload.body}
+                
+                ---
+                
+                *This issue was automatically synced from an external repository.*
+              `,
+              labels: ['synced', payload.project || 'external']
+            });
+
+  update-synced-issue:
+    if: github.event.action == 'external-issue-updated'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Synced Issue Status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const payload = context.payload.client_payload;
+            
+            // Find the synced issue by searching for the original URL
+            const { data: issues } = await github.rest.search.issuesAndPullRequests({
+              q: `repo:${context.repo.owner}/${context.repo.repo} is:issue "${payload.issue_url}" in:body`
+            });
+            
+            if (issues.items.length > 0) {
+              const syncedIssue = issues.items[0];
+              
+              if (payload.action === 'closed') {
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: syncedIssue.number,
+                  state: 'closed'
+                });
+                
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: syncedIssue.number,
+                  body: `🔄 **Sync Update**: Original issue was closed in ${payload.repository}`
+                });
+              } else if (payload.action === 'reopened') {
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: syncedIssue.number,
+                  state: 'open'
+                });
+                
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: syncedIssue.number,
+                  body: `🔄 **Sync Update**: Original issue was reopened in ${payload.repository}`
+                });
+              }
+            }

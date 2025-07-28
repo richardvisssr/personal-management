@@ -1,0 +1,84 @@
+name: 🎓 Afstuderen (Graduation)
+description: Track graduation project tasks and milestones
+title: "[AFSTUDEREN] "
+labels: ["afstuderen", "education"]
+assignees:
+  - richardvisssr
+body:
+  - type: dropdown
+    id: milestone
+    attributes:
+      label: Milestone
+      description: Which graduation milestone does this relate to?
+      options:
+        - Research Phase
+        - Proposal Writing
+        - Literature Review
+        - Implementation
+        - Testing & Validation
+        - Thesis Writing
+        - Presentation Prep
+        - Defense
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this task?
+      options:
+        - 🔴 Critical (blocking)
+        - 🟠 High (important)
+        - 🟡 Medium (normal)
+        - 🟢 Low (nice to have)
+    validations:
+      required: true
+  
+  - type: input
+    id: deadline
+    attributes:
+      label: Deadline
+      description: When does this need to be completed?
+      placeholder: "e.g., 2025-12-15 or End of Sprint 3"
+    validations:
+      required: false
+  
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Description
+      description: Detailed description of what needs to be done
+      placeholder: Describe the task, objectives, and expected outcomes
+    validations:
+      required: true
+  
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: How will you know when this is complete?
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+        - [ ] Criterion 3
+    validations:
+      required: false
+  
+  - type: textarea
+    id: resources
+    attributes:
+      label: Resources & References
+      description: Links, papers, tools, or people that might help
+      placeholder: Add any relevant resources, papers, or contact information
+    validations:
+      required: false
+  
+  - type: input
+    id: supervisor
+    attributes:
+      label: Supervisor/Mentor
+      description: Who can provide guidance on this task?
+      placeholder: "e.g., Prof. Smith, John Doe"
+    validations:
+      required: false

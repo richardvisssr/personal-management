@@ -1,0 +1,184 @@
+# GitHub Labels Configuration
+# This file can be used with tools like github-label-sync to manage repository labels
+
+## Project Areas
+- name: "afstuderen"
+  color: "0052cc"
+  description: "Graduation project related"
+
+- name: "enablelens"
+  color: "ff6600"
+  description: "EnableLens startup related"
+
+- name: "personal"
+  color: "8b5a2b"
+  description: "Personal projects and development"
+
+- name: "todo"
+  color: "cccccc"
+  description: "Daily todos and quick tasks"
+
+## Priority Labels
+- name: "priority: critical"
+  color: "d73a4a"
+  description: "🔴 Critical priority (blocking)"
+
+- name: "priority: high"
+  color: "ff9500"
+  description: "🟠 High priority (important)"
+
+- name: "priority: medium"
+  color: "ffeb3b"
+  description: "🟡 Medium priority (normal)"
+
+- name: "priority: low"
+  color: "4caf50"
+  description: "🟢 Low priority (nice to have)"
+
+## Component Labels (EnableLens)
+- name: "component: website"
+  color: "1f77b4"
+  description: "Website development"
+
+- name: "component: extension"
+  color: "ff7f0e"
+  description: "Chrome extension"
+
+- name: "component: infrastructure"
+  color: "2ca02c"
+  description: "Infrastructure and backend"
+
+## Type Labels
+- name: "type: feature"
+  color: "0052cc"
+  description: "New feature development"
+
+- name: "type: bug"
+  color: "d73a4a"
+  description: "Bug fix"
+
+- name: "type: research"
+  color: "9c27b0"
+  description: "Research and investigation"
+
+- name: "type: documentation"
+  color: "009688"
+  description: "Documentation updates"
+
+- name: "type: testing"
+  color: "795548"
+  description: "Testing and validation"
+
+- name: "type: deployment"
+  color: "607d8b"
+  description: "Deployment and release"
+
+## Status Labels
+- name: "status: planning"
+  color: "ffc107"
+  description: "In planning phase"
+
+- name: "status: in-progress"
+  color: "2196f3"
+  description: "Currently being worked on"
+
+- name: "status: review"
+  color: "ff9800"
+  description: "Under review"
+
+- name: "status: blocked"
+  color: "f44336"
+  description: "Blocked by dependencies"
+
+- name: "status: waiting"
+  color: "9e9e9e"
+  description: "Waiting for external input"
+
+## Time-based Labels
+- name: "urgency: today"
+  color: "ff1744"
+  description: "🔥 Must be done today"
+
+- name: "urgency: this-week"
+  color: "ff5722"
+  description: "⏰ This week"
+
+- name: "urgency: this-month"
+  color: "ff9800"
+  description: "📅 This month"
+
+- name: "urgency: recurring"
+  color: "3f51b5"
+  description: "🔄 Recurring task"
+
+## Special Labels
+- name: "synced"
+  color: "00bcd4"
+  description: "Synced from external repository"
+
+- name: "daily-review"
+  color: "4caf50"
+  description: "Daily review and automation"
+
+- name: "weekly-summary"
+  color: "8bc34a"
+  description: "Weekly summary report"
+
+- name: "automation"
+  color: "673ab7"
+  description: "Automated processes"
+
+- name: "integration"
+  color: "e91e63"
+  description: "Cross-repository integration"
+
+## Learning & Development
+- name: "learning"
+  color: "9c27b0"
+  description: "Learning and skill development"
+
+- name: "portfolio"
+  color: "ff5722"
+  description: "Portfolio showcase project"
+
+- name: "experiment"
+  color: "795548"
+  description: "Experimental or exploratory work"
+
+## Life Areas
+- name: "health"
+  color: "4caf50"
+  description: "Health and fitness related"
+
+- name: "finance"
+  color: "2e7d32"
+  description: "Financial planning and goals"
+
+- name: "social"
+  color: "e91e63"
+  description: "Social and family activities"
+
+- name: "home"
+  color: "8d6e63"
+  description: "Home and maintenance tasks"
+
+## Graduation Specific
+- name: "milestone: research"
+  color: "1976d2"
+  description: "Research phase milestone"
+
+- name: "milestone: proposal"
+  color: "1565c0"
+  description: "Proposal writing milestone"
+
+- name: "milestone: implementation"
+  color: "0d47a1"
+  description: "Implementation phase milestone"
+
+- name: "milestone: thesis"
+  color: "3f51b5"
+  description: "Thesis writing milestone"
+
+- name: "milestone: defense"
+  color: "512da8"
+  description: "Defense preparation milestone"
