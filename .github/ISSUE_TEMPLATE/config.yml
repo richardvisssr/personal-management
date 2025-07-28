@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussion
+    url: https://github.com/richardvisssr/personal-management/discussions
+    about: Brainstorm ideas, ask questions, or discuss the project
+  - name: 📖 Documentation
+    url: https://github.com/richardvisssr/personal-management/wiki
+    about: Read the project documentation and guides
