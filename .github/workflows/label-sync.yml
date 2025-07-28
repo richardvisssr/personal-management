@@ -1,0 +1,63 @@
+name: Label Sync
+description: Sync labels from configuration file
+on:
+  push:
+    paths:
+      - '.github/labels.yml'
+  workflow_dispatch:
+
+jobs:
+  sync-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Sync Labels
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const yaml = require('js-yaml');
+            const fs = require('fs');
+            
+            // Read labels configuration
+            const labelsConfig = yaml.load(fs.readFileSync('.github/labels.yml', 'utf8'));
+            
+            // Get existing labels
+            const { data: existingLabels } = await github.rest.issues.listLabelsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            
+            const existingLabelNames = existingLabels.map(label => label.name);
+            
+            // Create or update labels from config
+            for (const labelConfig of labelsConfig) {
+              const labelData = {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: labelConfig.name,
+                color: labelConfig.color,
+                description: labelConfig.description || ''
+              };
+              
+              if (existingLabelNames.includes(labelConfig.name)) {
+                // Update existing label
+                try {
+                  await github.rest.issues.updateLabel(labelData);
+                  console.log(`Updated label: ${labelConfig.name}`);
+                } catch (error) {
+                  console.error(`Failed to update label ${labelConfig.name}:`, error.message);
+                }
+              } else {
+                // Create new label
+                try {
+                  await github.rest.issues.createLabel(labelData);
+                  console.log(`Created label: ${labelConfig.name}`);
+                } catch (error) {
+                  console.error(`Failed to create label ${labelConfig.name}:`, error.message);
+                }
+              }
+            }
+            
+            console.log('Label sync completed!');

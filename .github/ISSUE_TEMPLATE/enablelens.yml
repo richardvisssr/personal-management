@@ -1,0 +1,112 @@
+name: 🚀 EnableLens Startup
+description: Track EnableLens development and business tasks
+title: "[ENABLELENS] "
+labels: ["enablelens", "startup"]
+assignees:
+  - richardvisssr
+body:
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which part of EnableLens does this relate to?
+      options:
+        - Website Development
+        - Chrome Extension
+        - Infrastructure
+        - Business Development
+        - User Research
+        - Marketing
+        - Legal/Compliance
+        - Analytics
+        - Customer Support
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this task?
+      options:
+        - 🔴 Critical (blocking)
+        - 🟠 High (important)
+        - 🟡 Medium (normal)
+        - 🟢 Low (nice to have)
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: type
+    attributes:
+      label: Task Type
+      description: What type of task is this?
+      options:
+        - Feature Development
+        - Bug Fix
+        - Research
+        - Documentation
+        - Testing
+        - Deployment
+        - Business Task
+        - Marketing
+        - User Feedback
+    validations:
+      required: true
+  
+  - type: input
+    id: deadline
+    attributes:
+      label: Deadline
+      description: When does this need to be completed?
+      placeholder: "e.g., 2024-08-15 or Before beta launch"
+    validations:
+      required: false
+  
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Description
+      description: Detailed description of what needs to be done
+      placeholder: Describe the task, objectives, and expected outcomes
+    validations:
+      required: true
+  
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: How will you know when this is complete?
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+        - [ ] Criterion 3
+    validations:
+      required: false
+  
+  - type: input
+    id: related_repo
+    attributes:
+      label: Related Repository
+      description: Which EnableLens repo does this relate to?
+      placeholder: "e.g., enablelens/website, enablelens/extension"
+    validations:
+      required: false
+  
+  - type: textarea
+    id: technical_notes
+    attributes:
+      label: Technical Notes
+      description: Any technical details, APIs, or implementation notes
+      placeholder: Add technical specifications, API endpoints, or implementation details
+    validations:
+      required: false
+  
+  - type: textarea
+    id: business_impact
+    attributes:
+      label: Business Impact
+      description: How does this task impact the business goals?
+      placeholder: Describe the expected business value or user impact
+    validations:
+      required: false

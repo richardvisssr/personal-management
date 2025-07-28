@@ -1,0 +1,102 @@
+name: Daily Workflow Automation
+on:
+  schedule:
+    # Run at 9 AM UTC (adjust for your timezone)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  daily-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for overdue tasks
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'todo'
+            });
+            
+            const now = new Date();
+            const overdue = issues.filter(issue => {
+              // Check if issue has a due date in the title or body
+              const dueDate = extractDueDate(issue.title + ' ' + issue.body);
+              return dueDate && dueDate < now;
+            });
+            
+            if (overdue.length > 0) {
+              // Create a summary issue or comment
+              const overdueList = overdue.map(issue => 
+                `- [${issue.title}](${issue.html_url})`
+              ).join('\n');
+              
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `📅 Daily Review - ${overdue.length} Overdue Tasks`,
+                body: `## Overdue Tasks\n\n${overdueList}\n\n*Automated daily review*`,
+                labels: ['daily-review', 'urgent']
+              });
+            }
+            
+            function extractDueDate(text) {
+              // Simple date extraction - can be enhanced
+              const dateMatch = text.match(/\d{4}-\d{2}-\d{2}/);
+              return dateMatch ? new Date(dateMatch[0]) : null;
+            }
+
+  weekly-summary:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 9 * * 1' # Run only on Mondays
+    steps:
+      - name: Generate weekly summary
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const oneWeekAgo = new Date();
+            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+            
+            const { data: closedIssues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed',
+              since: oneWeekAgo.toISOString()
+            });
+            
+            const { data: openIssues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open'
+            });
+            
+            const summary = `
+            ## Weekly Summary - ${new Date().toISOString().split('T')[0]}
+            
+            ### Completed This Week: ${closedIssues.length}
+            ${closedIssues.map(issue => `- [${issue.title}](${issue.html_url})`).join('\n')}
+            
+            ### Still Open: ${openIssues.length}
+            
+            #### By Priority:
+            - 🔴 Critical: ${openIssues.filter(i => i.labels.some(l => l.name.includes('critical'))).length}
+            - 🟠 High: ${openIssues.filter(i => i.labels.some(l => l.name.includes('high'))).length}
+            - 🟡 Medium: ${openIssues.filter(i => i.labels.some(l => l.name.includes('medium'))).length}
+            - 🟢 Low: ${openIssues.filter(i => i.labels.some(l => l.name.includes('low'))).length}
+            
+            #### By Project:
+            - 🎓 Afstuderen: ${openIssues.filter(i => i.labels.some(l => l.name === 'afstuderen')).length}
+            - 🚀 EnableLens: ${openIssues.filter(i => i.labels.some(l => l.name === 'enablelens')).length}
+            - 💡 Personal: ${openIssues.filter(i => i.labels.some(l => l.name === 'personal')).length}
+            - ✅ Daily Todos: ${openIssues.filter(i => i.labels.some(l => l.name === 'todo')).length}
+            `;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📊 Weekly Summary - ${new Date().toISOString().split('T')[0]}`,
+              body: summary,
+              labels: ['weekly-summary', 'report']
+            });

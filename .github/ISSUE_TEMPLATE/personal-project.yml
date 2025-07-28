@@ -1,0 +1,104 @@
+name: 💡 Personal Project
+description: Track personal development projects and side projects
+title: "[PERSONAL] "
+labels: ["personal", "project"]
+assignees:
+  - richardvisssr
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Project Category
+      description: What type of personal project is this?
+      options:
+        - Learning/Education
+        - Open Source Contribution
+        - Portfolio Project
+        - Hobby Project
+        - Skill Development
+        - Creative Project
+        - Health/Fitness
+        - Finance/Investment
+        - Home/Life Organization
+        - Other
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this to you?
+      options:
+        - 🔴 High (actively working on)
+        - 🟡 Medium (planned)
+        - 🟢 Low (someday/maybe)
+    validations:
+      required: true
+  
+  - type: input
+    id: goal_date
+    attributes:
+      label: Target Completion
+      description: When would you like to complete this?
+      placeholder: "e.g., End of month, Q4 2024, No deadline"
+    validations:
+      required: false
+  
+  - type: textarea
+    id: description
+    attributes:
+      label: Project Description
+      description: What do you want to accomplish?
+      placeholder: Describe your project goals, motivation, and expected outcomes
+    validations:
+      required: true
+  
+  - type: textarea
+    id: success_criteria
+    attributes:
+      label: Success Criteria
+      description: How will you know when you've succeeded?
+      placeholder: |
+        - [ ] Specific measurable outcome 1
+        - [ ] Specific measurable outcome 2
+        - [ ] Specific measurable outcome 3
+    validations:
+      required: false
+  
+  - type: textarea
+    id: resources_needed
+    attributes:
+      label: Resources Needed
+      description: What do you need to complete this project?
+      placeholder: |
+        Tools, courses, books, time, budget, equipment, etc.
+    validations:
+      required: false
+  
+  - type: textarea
+    id: learning_goals
+    attributes:
+      label: Learning Goals
+      description: What do you hope to learn from this project?
+      placeholder: Skills, technologies, concepts you want to develop
+    validations:
+      required: false
+  
+  - type: input
+    id: time_estimate
+    attributes:
+      label: Time Estimate
+      description: How much time do you expect this to take?
+      placeholder: "e.g., 2 weeks, 20 hours, ongoing"
+    validations:
+      required: false
+  
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why This Matters
+      description: Why is this project important to you?
+      placeholder: Personal motivation, career goals, or life improvement this project serves
+    validations:
+      required: false

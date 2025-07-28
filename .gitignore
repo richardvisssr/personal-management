@@ -1,0 +1,75 @@
+# .gitignore for Personal Management System
+
+# Temporary files
+/tmp/
+*.tmp
+*.temp
+
+# System files
+.DS_Store
+Thumbs.db
+.directory
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Build outputs (if any automation tools generate files)
+build/
+dist/
+out/
+
+# Node modules (if any JavaScript tools are added)
+node_modules/
+
+# Python cache (if any Python automation is added)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local environment variables
+.env
+.env.local
+.env.production
+
+# Personal notes that shouldn't be public
+personal-notes/
+private/
+secrets/
+
+# Large files that shouldn't be in git
+*.zip
+*.tar.gz
+*.pdf
+*.docx
+*.pptx
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# OS generated files
+*.DS_Store*
+ehthumbs.db
+Icon?
