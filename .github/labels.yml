@@ -1,0 +1,134 @@
+# Labels Configuration
+# This file defines all labels for consistent project management
+# Use with GitHub CLI: gh label create --file .github/labels.yml
+
+# Priority Labels
+- name: "urgent"
+  color: "d73027"
+  description: "Critical issues that need immediate attention"
+
+- name: "high"
+  color: "fc8d59"
+  description: "High priority items"
+
+- name: "medium"
+  color: "fee08b"
+  description: "Medium priority items"
+
+- name: "low"
+  color: "91cf60"
+  description: "Low priority items"
+
+# Type Labels
+- name: "feature"
+  color: "0052cc"
+  description: "New feature or enhancement"
+
+- name: "bug"
+  color: "d73027"
+  description: "Something isn't working"
+
+- name: "docs"
+  color: "1d76db"
+  description: "Documentation improvements"
+
+- name: "chore"
+  color: "fef2c0"
+  description: "Maintenance tasks"
+
+# Status Labels
+- name: "todo"
+  color: "fbca04"
+  description: "Ready to be worked on"
+
+- name: "in-progress"
+  color: "0e8a16"
+  description: "Currently being worked on"
+
+- name: "review"
+  color: "5319e7"
+  description: "Ready for review"
+
+- name: "done"
+  color: "006b75"
+  description: "Completed"
+
+- name: "blocked"
+  color: "b60205"
+  description: "Blocked by external dependencies"
+
+# Complexity Labels
+- name: "simple"
+  color: "c2e0c6"
+  description: "Easy task, can be completed quickly"
+
+- name: "complex"
+  color: "f9d0c4"
+  description: "Complex task requiring significant effort"
+
+# Web Development Specific Labels
+- name: "frontend"
+  color: "ff6b6b"
+  description: "Frontend/client-side work"
+
+- name: "backend"
+  color: "4ecdc4"
+  description: "Backend/server-side work"
+
+- name: "database"
+  color: "45b7d1"
+  description: "Database related changes"
+
+- name: "ui/ux"
+  color: "96ceb4"
+  description: "User interface/experience improvements"
+
+- name: "performance"
+  color: "ffeaa7"
+  description: "Performance improvements"
+
+- name: "security"
+  color: "fd79a8"
+  description: "Security related issues"
+
+- name: "testing"
+  color: "fdcb6e"
+  description: "Testing related work"
+
+# Framework Specific (examples - customize as needed)
+- name: "react"
+  color: "61dafb"
+  description: "React related work"
+
+- name: "nodejs"
+  color: "68a063"
+  description: "Node.js related work"
+
+- name: "vue"
+  color: "4fc08d"
+  description: "Vue.js related work"
+
+# Project Management Labels
+- name: "epic"
+  color: "8b5cf6"
+  description: "Large feature spanning multiple issues"
+
+- name: "duplicate"
+  color: "cfd3d7"
+  description: "This issue already exists"
+
+- name: "invalid"
+  color: "e4e669"
+  description: "This doesn't seem right"
+
+- name: "wontfix"
+  color: "ffffff"
+  description: "This will not be worked on"
+
+- name: "good first issue"
+  color: "7057ff"
+  description: "Good for newcomers"
+
+- name: "help wanted"
+  color: "008672"
+  description: "Extra attention is needed"
